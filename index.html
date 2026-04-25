@@ -360,10 +360,31 @@
     <section id="contact" style="text-align: center">
       <h2 class="section-title">Contact</h2>
       <p>ご相談は、下記メールアドレスまでお気軽にどうぞ。</p>
-      <p style="font-weight: bold; margin-top: 20px; font-size: 1.2rem">
-        f.yujin14@gmail.com
+
+      <p style="margin-top: 20px">
+        <a href="mailto:f.yujin14@gmail.com" class="contact-email">
+          f.yujin14@gmail.com
+        </a>
       </p>
     </section>
+
+    <style>
+      .contact-email {
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: var(--text-color);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* さりげない下線 */
+        transition: 0.3s;
+        display: inline-block;
+      }
+
+      .contact-email:hover {
+        color: var(--accent-color);
+        border-bottom: 1px solid var(--accent-color);
+        transform: translateY(-2px);
+      }
+    </style>
 
     <footer>
       <div class="sns-icons">
