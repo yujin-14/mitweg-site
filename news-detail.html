@@ -75,13 +75,10 @@
     </main>
 
     <script>
-      // --- ここを自分のmicroCMSの情報に書き換えて！ ---
-      const API_KEY = "x0WcTZuuVrtvUyRHjtRLLDcH80Uw9JDzRMg6";
-      const SERVICE_ID = "mitweg";
-      // ----------------------------------------------
+      // --- ここにあなたのAPIキーを入れてね ---
+      const API_KEY = "x0WcTZuuVrtvUyRHjtRLLDcH80Uw9JDzRMg6"; // ここだけ自分のキーをコピペ！
 
       async function getNewsDetail() {
-        // 1. URLから「?id=xxxx」の部分を取得
         const params = new URLSearchParams(window.location.search);
         const contentId = params.get("id");
 
@@ -92,9 +89,10 @@
         }
 
         try {
-          // 2. microCMSに特定の記事（ID指定）をリクエスト
+          // URLを直接書き込むスタイルに変更！(SERVICE_IDを使わない)
+          // https:// の後にあなたのサービスID（mitweg）を直接入れてね
           const res = await fetch(
-            `https://${SERVICE_ID}.microcms.io/api/v1/news/${contentId}`,
+            `https://mitweg.microcms.io/api/v1/news/${contentId}`,
             {
               headers: { "X-MICROCMS-API-KEY": API_KEY },
             },
@@ -104,16 +102,15 @@
 
           const post = await res.json();
 
-          // 3. 画面に表示
           document.getElementById("news-content").innerHTML = `
-                          <p id="news-date">${new Date(post.published).toLocaleDateString()}</p>
-                          <h1>${post.title}</h1>
-                          <div id="news-body">${post.content}</div>
-                      `;
+                <p id="news-date">${new Date(post.publishedAt).toLocaleDateString()}</p>
+                <h1>${post.title}</h1>
+                <div id="news-body">${post.content}</div>
+            `;
         } catch (error) {
           console.error(error);
           document.getElementById("news-content").innerHTML =
-            "<p>エラーが発生しました。</p>";
+            "<p>エラーが発生しました。設定を確認してください。</p>";
         }
       }
 
