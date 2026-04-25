@@ -93,12 +93,9 @@
 
         try {
           // 2. microCMSに特定の記事（ID指定）をリクエスト
-          const res = await fetch(
-            `https://${SERVICE_ID}.microcms.io/api/v1/news/${contentId}`,
-            {
-              headers: { "X-MICROCMS-API-KEY": API_KEY },
-            },
-          );
+          const res = await fetch(`https://${SERVICE_ID}/${contentId}`, {
+            headers: { "X-MICROCMS-API-KEY": API_KEY },
+          });
 
           if (!res.ok) throw new Error("Network response was not ok");
 
