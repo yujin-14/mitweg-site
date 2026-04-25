@@ -77,7 +77,7 @@
     <script>
       // --- ここを自分のmicroCMSの情報に書き換えて！ ---
       const API_KEY = "x0WcTZuuVrtvUyRHjtRLLDcH80Uw9JDzRMg6";
-      const SERVICE_ID = "https://mitweg.microcms.io/api/v1/news";
+      const SERVICE_ID = "mitweg";
       // ----------------------------------------------
 
       async function getNewsDetail() {
@@ -93,9 +93,12 @@
 
         try {
           // 2. microCMSに特定の記事（ID指定）をリクエスト
-          const res = await fetch(`https://${SERVICE_ID}/${contentId}`, {
-            headers: { "X-MICROCMS-API-KEY": API_KEY },
-          });
+          const res = await fetch(
+            `https://${SERVICE_ID}.microcms.io/api/v1/news/${contentId}`,
+            {
+              headers: { "X-MICROCMS-API-KEY": API_KEY },
+            },
+          );
 
           if (!res.ok) throw new Error("Network response was not ok");
 
