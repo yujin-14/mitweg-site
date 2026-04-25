@@ -106,7 +106,7 @@
 
           // 3. 画面に表示
           document.getElementById("news-content").innerHTML = `
-                          <p id="news-date">${new Date(post.publishedAt).toLocaleDateString()}</p>
+                          <p id="news-date">${new Date(post.published).toLocaleDateString()}</p>
                           <h1>${post.title}</h1>
                           <div id="news-body">${post.content}</div>
                       `;
