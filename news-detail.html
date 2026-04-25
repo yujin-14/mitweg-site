@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News | Mitweg</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&family=Playfair+Display:italic,wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #f5f5f4;
+        --text-color: #333333;
+        --accent-color: #8c8c8c;
+        --font-main: "Noto Sans JP", sans-serif;
+        --font-accent: "Playfair Display", serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: var(--font-main);
+        line-height: 1.8;
+      }
+
+      /* --- Header --- */
+      header {
+        padding: 20px 5%;
+        background: rgba(245, 245, 244, 0.8);
+        backdrop-filter: blur(5px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-logo img {
+        height: 30px;
+        width: auto;
+      }
+
+      /* --- Main Content --- */
+      main {
+        max-width: 800px; /* 読みやすい幅に絞る */
+        margin: 60px auto 100px;
+        padding: 0 5%;
+      }
+
+      .post-date {
+        font-family: var(--font-accent);
+        color: var(--accent-color);
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .post-title {
+        font-size: 2rem;
+        line-height: 1.4;
+        margin-bottom: 40px;
+        font-weight: 400;
+      }
+
+      /* microCMSのリッチエディタの中身を整える */
+      .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: 20px 0;
+      }
+
+      .post-content p {
+        margin-bottom: 20px;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 60px;
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--text-color);
+      }
+
+      /* --- Footer --- */
+      footer {
+        padding: 60px 5%;
+        text-align: center;
+        background: #eeebe9;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-logo">
+        <a href="index.html"><img src="img/logo.png" alt="Mitweg" /></a>
+      </div>
+    </header>
+
+    <main>
+      <article id="post-area">
+        <p>Loading...</p>
+      </article>
+
+      <a href="index.html" class="back-link">← Back to Home</a>
+    </main>
+
+    <footer>
+      <p style="font-size: 0.8rem; opacity: 0.6">&copy; 2026 Mitweg</p>
+    </footer>
+
+    <script>
+      const MICROCMS_API_KEY = "x0WcTZuuVrtvUyRHjtRLLDcH80Uw9JDzRMg6"; // ここに自分のキーを入れてね
+      const SERVICE_DOMAIN = "https://mitweg.microcms.io/api/v1/news"; // ここに自分のサービスIDを入れてね
+
+      // URLから記事IDを取得
+      const params = new URLSearchParams(window.location.search);
+      const contentId = params.get("id");
+
+      async function fetchPost() {
+        if (!contentId) {
+          document.getElementById("post-area").innerHTML =
+            "<p>記事が見つかりませんでした。</p>";
+          return;
+        }
+
+        const endpoint = `https://${SERVICE_DOMAIN}.microcms.io/api/v1/news/${contentId}`;
+
+        try {
+          const response = await fetch(endpoint, {
+            headers: { "X-MICROCMS-API-KEY": MICROCMS_API_KEY },
+          });
+          const data = await response.json();
+
+          document.getElementById("post-area").innerHTML = `
+                    <span class="post-date">${new Date(data.publishedAt).toLocaleDateString()}</span>
+                    <h1 class="post-title">${data.title}</h1>
+                    <div class="post-content">${data.content}</div>
+                `;
+          // ページタイトルも記事名に変えちゃう
+          document.title = `${data.title} | Mitweg`;
+        } catch (error) {
+          console.error("取得失敗:", error);
+          document.getElementById("post-area").innerHTML =
+            "<p>エラーが発生しました。</p>";
+        }
+      }
+
+      fetchPost();
+    </script>
+  </body>
+</html>

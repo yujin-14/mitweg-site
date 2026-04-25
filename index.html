@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mitweg | 共にある道、新しい一歩を。</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&family=Playfair+Display:italic,wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #f5f5f4;
+        --text-color: #333333;
+        --accent-color: #8c8c8c;
+        --font-main: "Noto Sans JP", sans-serif;
+        --font-accent: "Playfair Display", serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: var(--font-main);
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      /* --- Header --- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 5%;
+        z-index: 1000;
+        background: rgba(245, 245, 244, 0.8);
+        backdrop-filter: blur(8px);
+      }
+
+      .header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-logo {
+        font-family: var(--font-accent);
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      /* --- Layout --- */
+      section {
+        padding: 120px 5% 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h2.section-title {
+        font-family: var(--font-accent);
+        font-size: 2.2rem;
+        margin-bottom: 60px;
+        text-align: center;
+      }
+
+      /* --- First View (Abstract Line) --- */
+      .fv {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        padding-top: 0;
+      }
+
+      .fv-abstract-w {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 30px;
+      }
+
+      .w-path {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: wPathDraw 2.5s ease-in-out forwards;
+      }
+
+      .fv-copy-area {
+        opacity: 0;
+        animation: fadeIn 1.5s ease-out 2s forwards;
+      }
+
+      .fv-copy {
+        font-family: var(--font-accent);
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+        color: var(--accent-color);
+      }
+
+      .sparkle-dots .dot {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #fff;
+        opacity: 0;
+        animation: dotSparkle 1s ease-out forwards;
+      }
+
+      /* --- About --- */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .profile-img-styled {
+        width: 100%;
+        border-radius: 4px;
+        filter: grayscale(100%);
+        transition: 0.6s;
+        box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.03);
+      }
+
+      .profile-img-styled:hover {
+        filter: grayscale(0%);
+        box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.05);
+      }
+
+      /* --- Service / News --- */
+      .service-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.5);
+        padding: 40px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      /* --- Footer --- */
+      footer {
+        padding: 60px 5%;
+        text-align: center;
+        background: #eeebe9;
+      }
+
+      .sns-links a {
+        margin: 0 15px;
+        text-decoration: none;
+        color: var(--text-color);
+        font-size: 0.9rem;
+      }
+
+      /* --- Animations --- */
+      @keyframes wPathDraw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes dotSparkle {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .about-image {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <a href="index.html" class="header-logo">Mitweg</a>
+      </div>
+    </header>
+
+    <section class="fv">
+      <div class="fv-abstract-w">
+        <svg viewBox="0 0 400 200" width="100%">
+          <path
+            class="w-path"
+            d="M50,150 Q100,50 150,150 T250,150 T350,150"
+            fill="none"
+            stroke="#333"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+      <div class="fv-copy-area">
+        <p class="fv-copy">Wir gehen mit dir.</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7">
+          共にある道、新しい一歩を。
+        </p>
+      </div>
+      <div class="sparkle-dots">
+        <div
+          class="dot"
+          style="top: 30%; left: 45%; animation-delay: 2.5s"
+        ></div>
+        <div
+          class="dot"
+          style="top: 40%; left: 55%; animation-delay: 2.8s"
+        ></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            「自分らしい道を、納得して歩みたい」<br />そんな想いに寄り添うキャリアアドバイザーであり、クリエイターとして活動しています。
+          </p>
+          <p style="margin-top: 20px; font-weight: bold">
+            一人ひとりの「一歩」を大切に、伴走します。
+          </p>
+          <div
+            style="
+              margin-top: 40px;
+              border-top: 1px solid #ddd;
+              padding-top: 20px;
+            "
+          >
+            <p style="font-size: 0.9rem; opacity: 0.6">Self Introduction</p>
+            <p>
+              学生時代のリーダー経験から、人の挑戦を支えることに喜びを感じ、現在はキャリア支援とWeb制作の両面から「新しい道」を作るお手伝いをしています。
+            </p>
+          </div>
+        </div>
+        <div class="about-image">
+          <img
+            src="img/profile.png"
+            alt="Fukushima Yujin"
+            class="profile-img-styled"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="service">
+      <h2 class="section-title">Services</h2>
+      <div class="service-container">
+        <div class="card">
+          <h3>就活・採用サポート</h3>
+          <p>キャリア相談や採用ブランディングを支援します。</p>
+        </div>
+        <div class="card">
+          <h3>HP制作</h3>
+          <p>想いが伝わる、クリーンで「ゆるい」サイトを制作します。</p>
+        </div>
+        <div class="card">
+          <h3>その他依頼</h3>
+          <p>ライティングやイベント登壇など、幅広く承ります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2 class="section-title">News / Blog</h2>
+      <div id="news-list" class="service-container">
+        <p style="text-align: center; width: 100%">Loading...</p>
+      </div>
+    </section>
+
+    <section id="contact" style="text-align: center">
+      <h2 class="section-title">Contact</h2>
+      <p>ご相談は、下記メールアドレスまでお気軽にどうぞ。</p>
+      <p style="font-weight: bold; margin-top: 20px; font-size: 1.2rem">
+        f.yujin14@gmail.com
+      </p>
+    </section>
+
+    <footer>
+      <div class="sns-icons">
+        <a
+          href="https://www.instagram.com/_yujin_14_fuku/"
+          target="_blank"
+          aria-label="Instagram"
+        >
+          <img src="img/Instagram.png" alt="Instagram" />
+        </a>
+        <a
+          href="https://www.facebook.com/profile.php?id=100077938088915&locale=ja_JP"
+          target="_blank"
+          aria-label="Facebook"
+        >
+          <img src="img/Facebook.png" alt="Facebook" />
+        </a>
+        <a
+          href="https://note.com/yujin_spontan"
+          target="_blank"
+          aria-label="note"
+        >
+          <img src="img/note.png" alt="note" />
+        </a>
+      </div>
+      <p style="margin: 20px 0; font-size: 0.8rem; opacity: 0.5">
+        &copy; 2026 Mitweg
+      </p>
+      <a
+        href="privacy.html"
+        style="
+          font-size: 0.75rem;
+          text-decoration: none;
+          color: var(--accent-color);
+        "
+        >プライバシーポリシー</a
+      >
+    </footer>
+
+    <style>
+      .sns-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px; /* アイコン同士の間隔 */
+        margin-bottom: 10px;
+      }
+
+      .sns-icons a {
+        display: inline-block;
+        transition:
+          transform 0.3s,
+          opacity 0.3s;
+      }
+
+      .sns-icons img {
+        width: 24px; /* アイコンのサイズ（お好みで調整してね！） */
+        height: 24px;
+        object-fit: contain;
+        filter: grayscale(100%); /* サイトに合わせてモノクロに */
+        opacity: 0.7;
+      }
+
+      .sns-icons a:hover {
+        transform: translateY(-3px); /* 浮き上がるエフェクト */
+      }
+
+      .sns-icons a:hover img {
+        filter: grayscale(0%); /* ホバーした時だけ本来の色に！ */
+        opacity: 1;
+      }
+    </style>
+
+    <script>
+      const API_KEY = "x0WcTZuuVrtvUyRHjtRLLDcH80Uw9JDzRMg6";
+      const ENDPOINT = "https://mitweg.microcms.io/api/v1/news";
+
+      async function getNews() {
+        try {
+          const res = await fetch(ENDPOINT, {
+            headers: { "X-MICROCMS-API-KEY": API_KEY },
+          });
+          const data = await res.json();
+          const list = document.getElementById("news-list");
+          list.innerHTML = data.contents
+            .slice(0, 3)
+            .map(
+              (post) => `
+                    <div class="card">
+                        <p style="font-size: 0.8rem; color: #888;">${new Date(post.publishedAt).toLocaleDateString()}</p>
+                        <h3 style="margin: 10px 0;">${post.title}</h3>
+                        <a href="news-detail.html?id=${post.id}" style="color: #333; font-size: 0.9rem;">Read More</a>
+                    </div>
+                `,
+            )
+            .join("");
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      getNews();
+    </script>
+  </body>
+</html>
