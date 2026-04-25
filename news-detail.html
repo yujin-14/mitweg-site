@@ -23,6 +23,8 @@
         line-height: 1.8;
         margin: 0;
       }
+      /* --- Header --- */
+      /* --- Header Style (Image Logo Version) --- */
       .site-header {
         position: fixed;
         top: 0;
@@ -58,6 +60,13 @@
 
       .header-logo:hover {
         opacity: 0.6;
+      }
+
+      /* スマホではロゴを少し小さくする */
+      @media (max-width: 768px) {
+        .header-logo img {
+          height: 32px;
+        }
       }
       main {
         max-width: 800px;
