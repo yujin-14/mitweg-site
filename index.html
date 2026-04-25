@@ -407,7 +407,7 @@
             .map(
               (post) => `
                     <div class="card">
-                        <p style="font-size: 0.8rem; color: #888;">${new Date(post.publishedAt).toLocaleDateString()}</p>
+                        <p style="font-size: 0.8rem; color: #888;">${new Date(post.published).toLocaleDateString()}</p>
                         <h3 style="margin: 10px 0;">${post.title}</h3>
                         <a href="news-detail.html?id=${post.id}" style="color: #333; font-size: 0.9rem;">Read More</a>
                     </div>
