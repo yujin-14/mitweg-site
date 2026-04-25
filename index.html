@@ -32,31 +32,49 @@
       }
 
       /* --- Header --- */
-      header {
+      /* --- Header Style (Image Logo Version) --- */
+      .site-header {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        padding: 20px 5%;
         z-index: 1000;
         background: rgba(245, 245, 244, 0.8);
         backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
       }
 
       .header-inner {
         max-width: 1200px;
         margin: 0 auto;
+        padding: 15px 5%;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start; /* 左寄せ */
         align-items: center;
       }
 
       .header-logo {
-        font-family: var(--font-accent);
-        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
         text-decoration: none;
-        color: var(--text-color);
-        font-weight: 600;
+        transition: opacity 0.3s;
+      }
+
+      .header-logo img {
+        height: 40px; /* ここでロゴの大きさを調整してね！ */
+        width: auto; /* 横幅は自動で比率を維持 */
+        display: block;
+      }
+
+      .header-logo:hover {
+        opacity: 0.6;
+      }
+
+      /* スマホではロゴを少し小さくする */
+      @media (max-width: 768px) {
+        .header-logo img {
+          height: 32px;
+        }
       }
 
       /* --- Layout --- */
@@ -216,9 +234,12 @@
     </style>
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <div class="header-inner">
-        <a href="index.html" class="header-logo">Mitweg</a>
+        <a href="index.html" class="header-logo">
+          <img src="img/logo.png" alt="Mitweg" />
+        </a>
+        <nav class="header-nav"></nav>
       </div>
     </header>
 
